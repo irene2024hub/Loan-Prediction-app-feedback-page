@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loan Prediction</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body{
+        font-family: Arial, Helvetica, sans-serif
+    }
+  header{
+    background-color: #fff;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h1, h2{
+    text-align: center;
+  }
+  .data{
+    height: 100px;
+    border-radius: 10px;
+    background-color: gainsboro;
+    max-width: 500px; 
+    text-align: center;
+    margin: auto;
+    display: block;
+    margin-bottom: 50px;
+  }
+  footer{
+    text-align: center;
+    border-top: 4px solid gainsboro;
+    background-color: rgb(202, 198, 198);
+  }
+</style>
+</head>
+<body>
+  <header>
+        <h1>IRENE'S LOAN PREDICTION MODEL</h1>
+  </header>  
+  <div class="container">
+    <h2>METRICS</h2>
+    <div id="TotalPredictions" class="data">
+        <h3>Total Loans Predicted</h3>
+        <p class="num" id="TP">0</p>
+    </div>
+    <div id="TotalApproved" class="data">
+        <h3>Total Loans Predicted as Approved</h3>
+        <p class="num" id="TA">0</p>
+    </div>
+    <div id="TotalRejected" class="data">
+        <h3>Total Loans Predicted as Rejected</h3>
+        <p class="num" id="TR">0</p>
+    </div>
+  </div>
+  <footer>
+    &copy; Ayakazi Irene
+  </footer>
+  <script>
+    const TP = document.getElementById("TP")
+    const TA = document.getElementById("TA")
+    const TR = document.getElementById("TR")
+    try {
+        const get = async () => {
+            const res = await fetch("/api/metrics")
+            const data = await res.json()
+            TP.innerText = data.totalPredictions
+            TA.innerText = data.Approved
+            TR.innerText = data.Rejected
+            console.log(data)
+        } 
+        get()
+    } catch (error) {
+        const Err = new Error(error)
+        console.log(Err.message)
+    }
+    
+  </script>
+</body>
+</html>
