@@ -3,6 +3,13 @@ import mongoose from "mongoose"
 import predictionModel from "./models/predictionModel.js" 
 import Connect from "./Connect/connection.js"
 import dotenv from "dotenv"
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path'
+
+// Recreate __filename and __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 dotenv.config()
 const app = express()
 
@@ -12,7 +19,7 @@ Connect(ConnectionString)
 app.use(express.json())
 
 app.get("/", (req, res) => {
-    res.sendFile("C:/Users/NEW USER/predictionmetrics/public/index.html")
+    res.sendFile(path.join(__dirname, "public", "index.html"))
 })
 app.post("/api/prediction", async (req, res) => {
     const predictions = req.body
