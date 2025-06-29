@@ -2,6 +2,8 @@ import express from "express"
 import mongoose from "mongoose"
 import predictionModel from "./models/predictionModel.js" 
 import Connect from "./Connect/connection.js"
+import dotenv from "dotenv"
+dotenv.config()
 const app = express()
 
 const {ConnectionString} = process.env
